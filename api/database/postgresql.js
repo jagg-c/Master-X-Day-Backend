@@ -10,9 +10,10 @@ const connectionData = {
 }
 
 const client = new Client(connectionData)
-client.connect()
+
 
 async function sendQuery(query){
+    client.connect()
     const result = client.query(query)
     .then(response => {
         console.log(response.rows)
