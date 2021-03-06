@@ -7,7 +7,7 @@ const router = express.Router()
 
 const flightService = new FlightService();
 
-router.route('/flight/:flightId')
+router.route('/flight/')
     .get(
         async function(req, res, next){
             try{
@@ -33,6 +33,8 @@ router.route('/flight/:flightId')
                 console.log(err);
             }
         })
+
+router.route('/flight/:flightId')
     .put(
         async function(req, res, next){
             const { body: flight } = req;

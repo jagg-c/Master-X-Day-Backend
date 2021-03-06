@@ -1,4 +1,4 @@
-const PostgresLib = require('../database/postgresql');
+const { getFlight} = require('../database/postgresql');
 
 class FlightService {
   constructor(){
@@ -6,12 +6,12 @@ class FlightService {
   }
 
   async getFlight ({ flightId }){
-    const flight = [] //await this.PostgresLib.get(this.collection, flightId);
+    const flight = await getFlight(this.collection, flightId);
     return flight || [];
   }
 
   async getFlights (){
-    const flights = []; //await this.PostgresLib.getAll(this.collection);
+    const flights = await getFlight(this.collection, flightId);
     return flights || [];
   }
 
