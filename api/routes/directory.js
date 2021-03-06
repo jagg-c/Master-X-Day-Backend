@@ -24,9 +24,9 @@ router.route('/flight/')
         async function(req, res, next){
             const { body: flight } = req;
             try{
-                const createdFlightId = await flightService.createFlight(flight);
-                res.status(200).json({
-                    data: flight,
+                const createdFlightId = await flightService.createFlight({ flight });
+                res.status(201).json({
+                    data: createdFlightId,
                     message: 'flight created',
                 });
             }catch (err){
