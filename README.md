@@ -56,15 +56,41 @@ create table destination(
 
 How many users have travelled in the last 7 days, organized by destination routes.
 ```sql
-select r.destination, count(p.id)
-from route r
-inner join flight f
-   on f.route = r.id
-inner join ticket t
-   on t.flightId = f.id
-inner join passenger p
-   on p.id = t.passengerId
-where f.date > current_date - interval '7 days'
-order by r.destination
+-- routes with highest traffic
+SELECT 
+       (SELECT count(t.ticketid) FROM ticket t WHERE flightid = f.flightid) AS "tickets",
+       r2.value 
+       f.timeboarding 
+  FROM flight f  
+       INNER JOIN route r2 ON r2.routeid = f.routeid 
+ORDER BY "tickets" DESC LIMIT 3;
+
+-- Least frequent routs of the last 8 hours
+
+SELECT 
+      d.value 
+ FROM route r 
+      INNER JOIN flight f 		ON f.routeid = r.routeid
+      INNER JOIN destination d	ON d.destinationid = f.routeid 
+WHERE f.arrivaldate > (SELECT (NOW() - interval '8 hour'));
+
+-- How many users have travelled in the last 7 days, organized by destination routes.
+SELECT 
+       p.firstname ,
+       p.lastname ,
+       t.ticketid,
+       t.seat ,
+       f.arrivaldate ,
+       f.exitdate ,
+       f.status ,
+       f.timeboarding ,
+       d.value 
+  FROM passenger p 
+INNER JOIN ticket t ON t.ticketid = p.ticketid
+INNER JOIN flight f ON f.flightid = t.flightid 
+INNER JOIN route r2 ON r2.routeid = f.routeid 
+INNER JOIN destination d ON d.destinationid = r2.destinationid 
+WHERE f.arrivaldate > (SELECT (NOW() - interval '7 day'))
+ORDER BY d.value;
 ```
 
