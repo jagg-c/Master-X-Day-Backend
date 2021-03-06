@@ -17,7 +17,7 @@ async function sendQuery(query){
     .then(response => {
         console.log(response.rows)
         client.end()
-        return true
+        return response.rows
     })
     .catch(err => {
         client.end()
@@ -32,7 +32,7 @@ const getFlight = async function getRegisters(){
     SELECT COUNT(*) FROM public.flight;
     `
     const result = await sendQuery(query)
-    return result == true ? 200 : 500
+    return result == false ? 500 : result
 }
 
 const createFlight = async function createRegister(flight){
@@ -54,7 +54,7 @@ const createFlight = async function createRegister(flight){
     `
 
     const result = await sendQuery(query)
-    return result == true ? 201 : 500
+    return result == false ? 500 : result
 }
 
 const updateFlight = async function updateRegister(flight){
@@ -68,7 +68,7 @@ const updateFlight = async function updateRegister(flight){
      WHERE flightid = ${flight.flightid}
     `
     const result = await sendQuery(query)
-    return result == true ? 200 : 500
+    return result == false ? 500 : 200
 }
 
 const deleteFlight = async function deleteRegister(flight){
@@ -76,7 +76,9 @@ const deleteFlight = async function deleteRegister(flight){
     DELETE FROM public.flight WHERE flightid = ${flight.flightid}
     `
     const result = await sendQuery(query)
-    return result == true ? 201 : 500
+    return result == true ? 500 : 200
 }
+
+console.log(getFlight());
 
 module.exports = { getFlight, createFlight, updateFlight, deleteFlight}
