@@ -8,8 +8,16 @@ const router = express.Router()
 const flightService = new FlightService();
 
 router.route('/flight/')
+    /**
+    * GET /flight
+    * @summary check flights
+    * @tags Flights
+    * @return { object } 200 - File saved
+    * @return { object } 400 - Bad request response
+    */
     .get(
         async function(req, res, next){
+            console.log('Files')
             try{
                 const flights = await flightService.getFlights();
                 res.status(200).json({
@@ -20,6 +28,23 @@ router.route('/flight/')
                 console.log(err);
             }
         })
+    /**
+    * Flight
+    * @typedef { object } Flight
+    * @property { string } routeid
+    * @property { string } updated 
+    * @property { string } exitdate
+    * @property { string } timeboarding
+    */
+
+    /**
+    * POST /flight
+    * @summary Create flights
+    * @tags Flights
+    * @param { Flight } request.body.required
+    * @return { object } 200 - success response - application/json
+    * @return { object } 400 - Bad request response
+    */
     .post(
         async function(req, res, next){
             const { body: flight } = req;
@@ -35,6 +60,15 @@ router.route('/flight/')
         })
 
 router.route('/flight/:flightId')
+    /**
+    * PUT /flight
+    * @summary check flights
+    * @tags Flights
+    * @param {string} flightId.path
+    * @param { Flight } request.body.required
+    * @return { object } 200 - File saved
+    * @return { object } 400 - Bad request response
+    */
     .put(
         async function(req, res, next){
             const { body: flight } = req;
@@ -53,6 +87,14 @@ router.route('/flight/:flightId')
                 console.log(err);
             }
         })
+    /**
+    * DELETE /flight
+    * @summary check flights
+    * @tags Flights
+    * @param {string} flightId.path
+    * @return { object } 200 - File saved
+    * @return { object } 400 - Bad request response
+    */
     .delete(
         async function(req, res, next){
             const { flightId } = req.params;
@@ -70,18 +112,3 @@ router.route('/flight/:flightId')
 
 
 module.exports = router
-
-/**
- * A file csv
- * @typedef {object} File
- * @property {string} file - File CSV - binary
- */
-
-/**
- * POST /flight
- * @summary Upload a csv file
- * @tags Houses
- * @param {File} request.body.required - File info - multipart/form-data
- * @return {object} 200 - File saved
- * @return {object} 400 - Bad request response
- */
