@@ -3,6 +3,13 @@
 ## Descriptión
 AeroPlatzi wants you to build a platform that allows them to manage administer the approximately 10,000 daily flights, a key goal for the company.
 
+
+## Front
+[AeroPlatzi](https://cesaroros.github.io/platzidayx/)
+
+## Swagger
+[Api Docs](http://35.226.180.202:3000/api-docs/)
+
 ## Relational database
 
 ### Database Diagram
