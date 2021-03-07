@@ -45,6 +45,8 @@ function insertFlight(){
         console.log('Success:', response)
         alert("Inserted Correctly")
     });;
+
+    getFlights();
 }
 
 function updateFlight(){
@@ -64,6 +66,8 @@ function updateFlight(){
         console.log('Success:', response)
         alert("Updated Correctly.")
     });;
+
+    getFlights();
 }
 
 function deleteFlight(){
@@ -84,6 +88,8 @@ function deleteFlight(){
         console.log('Success:', response)
         alert("Deleted Correctly")
     });;
+
+    getFlights();
 }
 
 function flightChange(){
