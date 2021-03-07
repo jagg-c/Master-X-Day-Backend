@@ -5,7 +5,7 @@ AeroPlatzi wants you to build a platform that allows them to manage administer t
 
 
 ## Front
-[AeroPlatzi](https://cesaroros.github.io/platzidayx/)
+[AeroPlatzi](http://35.226.180.202:3000/front/)
 
 ## Swagger
 [Api Docs](http://35.226.180.202:3000/api-docs/)
