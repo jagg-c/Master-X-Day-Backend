@@ -17,6 +17,6 @@ const PORT = 3000
 app.use(cors())
 app.use(bodyParser.json())
 app.use('/', routes)
-
+app.use('/front', express.static('../frontend'))
 
 app.listen(PORT, () => console.log(`App listening at http:/localhost:${PORT}`))
