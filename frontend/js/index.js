@@ -1,5 +1,5 @@
-const url = "https://aeroplatziteam8.vercel.app/";
-
+//const url = "https://aeroplatziteam8.vercel.app/";
+const url = "http://35.226.180.202:3000/"
 function init(){
     getFlights();
     document.getElementById("btnUpdate").disabled = true;
@@ -29,11 +29,14 @@ function getFlights(){
 
 function insertFlight(){
     var event = data();
-    console.log(event);
 
     fetch(url + "flight", 
     {
         method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
         body: JSON.stringify(event) // body data type must match "Content-Type" header
     })
     .then(res => res.json())
@@ -45,8 +48,6 @@ function insertFlight(){
         console.log('Success:', response)
         alert("Inserted Correctly")
     });;
-
-    getFlights();
 }
 
 function updateFlight(){
@@ -55,6 +56,10 @@ function updateFlight(){
     fetch(url + "flight/" +event.flightid, 
     {
         method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(event) // body data type must match "Content-Type" header
     })
     .then(res => res.json())
@@ -66,8 +71,6 @@ function updateFlight(){
         console.log('Success:', response)
         alert("Updated Correctly.")
     });;
-
-    getFlights();
 }
 
 function deleteFlight(){
@@ -77,6 +80,10 @@ function deleteFlight(){
     fetch(url + "flight/" +event.flightid, 
     {
         method: 'DELETE', // *GET, POST, PUT, DELETE, etc.
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify(event) // body data type must match "Content-Type" header
     })
     .then(res => res.json())
@@ -88,8 +95,6 @@ function deleteFlight(){
         console.log('Success:', response)
         alert("Deleted Correctly")
     });;
-
-    getFlights();
 }
 
 function flightChange(){
