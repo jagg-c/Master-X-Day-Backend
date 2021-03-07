@@ -1,6 +1,7 @@
 'use strict'
 
 const bodyParser = require('body-parser')
+const cors = require('cors')
 const express = require('express')
 const expressJSDocSwagger = require('express-jsdoc-swagger')
 
@@ -13,8 +14,8 @@ expressJSDocSwagger(app)(options)
 
 const PORT = 3000
 
+app.use(cors())
 app.use(bodyParser.json())
-
 app.use('/', routes)
 
 
