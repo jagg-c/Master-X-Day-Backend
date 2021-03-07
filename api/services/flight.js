@@ -1,32 +1,35 @@
-const { getFlight} = require('../database/postgresql');
+const { getFlights, getFlightsCounts, createFlight, updateFlight, deleteFlight} = require('../database/postgresql');
 
 class FlightService {
   constructor(){
     this.collection = 'flight';
   }
 
-  async getFlight ({ flightId }){
-    const flight = await getFlight(this.collection, flightId);
-    return flight || [];
+  async getFlights (){
+    const flights = await getFlights();
+    return flights || [];
   }
 
-  async getFlights (){
-    const flights = await getFlight(this.collection, flightId);
+  async getFlightsCount (){
+    const flights = await getFlightsCounts();
     return flights || [];
   }
 
   async createFlight ({ flight }){
-    const createdFlightId = 1; //await this.PostgresLib.insert(this.collection, flight);
+    console.log(flight);
+    const createdFlightId = await createFlight(flight);
     return createdFlightId;
   }
 
   async updateFlight ({ flightId,  flight }){
-    const updatedFlightId = flightId //;await this.PostgresLib.update(this.collection, flightId, flight);
+    flight.flightid = flightId;
+    const updatedFlightId = await updateFlight(flight);
     return updatedFlightId;
   }
 
   async deleteFlight({ flightId }){
-    const deletedFlightId = flightId; //await this.PostgresLib.delete(this.collection, flightId);
+    const flight = { flightid: flightId}
+    const deletedFlightId = await deleteFlight( flight );
     return deletedFlightId;
   }
 }
